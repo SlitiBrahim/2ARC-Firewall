@@ -41,3 +41,25 @@ You can also add a new rule by typing "sudo venv/bin/python3.5 firewall.py --add
 
 -> This rule drops incoming packets from ip source 192.168.1.45 and accepts those from 192.168.1.78.
 
+Test this Firewall
+
+Assume next commands with you config:
+
+Client IP: 192.168.1.45
+Firewall Computer IP: 192.168.1.79
+
+Assume we want to block the previous client ip from incoming requests:
+Edit "rules.rl" and add:
+
+192.168.1.45;BLOCK
+
+Now, launch the firewall, so it will consider our rule:
+sudo venv/bin/python3.5 firewall.py --run
+
+Now, for test, perform ICMP requests to the firewall computer:
+ping 192.168.1.79
+
+You should get any response since our firewall blocks that requests.
+
+If you stop the firewall, you'll realize that ICMP requests work now.
+
